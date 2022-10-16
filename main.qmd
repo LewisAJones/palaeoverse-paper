@@ -1,5 +1,5 @@
 ---
-title: "palaeoverse: a community-driven *R* package to support palaeobiological analysis"
+title: "palaeoverse: a community-driven R package to support palaeobiological analysis"
 author:
   - "---"
   - Lewis A. Jones^1^, William Gearty^2^, Bethany J. Allen^3,4^, Kilian Eichenseer^5^, Christopher D. Dean^6^, Sofía Galván^1^, Miranta Kouvari^6,7^, Emma M. Dunne^8^, Pedro L. Godoy^9,10^, Cecily Nicholl^6^, Lucas Buffan^11^, Erin M. Dillon^12,13^, Joseph T. Flannery-Sutherland^14^, and Alfio Alessandro Chiarenza^1^
@@ -35,60 +35,60 @@ format:
       - right=25.4mm
       - heightrounded
 bibliography: references.bib
-csl: MEE.csl
+csl: methods-in-ecology-and-evolution.csl
 ---
 
-1.  The open-source programming language 'R' has become a standard tool in the palaeobiologists' toolkit. Its popularity amongst the community continues to grow with published articles often citing the usage of R, and R packages. However, while several packages exist to support palaeobiological analysis, there is a lack of agreed standards for data preparation and of packages to support this. Consequently, data preparation steps are often unclear and not reproducible, even when code is provided. Moreover, due to a lack of code accessibility and documentation, palaeobiologists are often forced to 'reinvent the wheel' to find solutions to issues already resolved by members of the community.
-2.  Here, we introduce `palaeoverse`, a community-driven R package for computational palaeobiological research. The package is freely available and has three core principles: (1) streamline data preparation and analyses; (2) enhance code readability; and (3) improve reproducibility of results. As part of the development of the package, we combined our experience with that of the wider palaeobiological community to understand what tools are needed. The latter was collated by conducting an online survey distributed via social media and email exchange.
-3.  We first report the findings of the survey which shaped the development of the package. Subsequently, we describe and demonstrate the functionality available in `palaeoverse` and provide usage examples. Finally, we discuss the resources we have made available for the community, and the future perspectives of the `palaeoverse` project.
-4.  `palaeoverse` is the first community driven R package in palaeobiology, developed with the intention of bringing the community together to establish agreed standards, assisting to modernise the discipline. The package provides a user-friendly platform for preparing data for analysis with well-documented code to enhance transparency. Finally, the functionality available in `palaeoverse` enables rapid reuse and reproducibility of research results, as well as improving code readability to support the review process.
+1.  The open-source programming language 'R' has become a standard tool in the palaeobiologists' toolkit. Its popularity amongst the community continues to grow with published articles often citing the usage of R, and R packages. While several packages exist to support palaeobiological analysis, there is a lack of agreed standards for data preparation and of frameworks to support this. Consequently, data preparation steps are often unclear and not reproducible, even when code is provided. Moreover, due to a lack of code accessibility and documentation, palaeobiologists are often forced to 'reinvent the wheel' to find solutions to issues already solved by other members of the community.
+2.  Here, we introduce `palaeoverse`, a community-driven R package for quantitative palaeobiological research. The package is freely available and has three core principles: (1) streamline data preparation and analyses; (2) enhance code readability; and (3) improve reproducibility of results. During development of the package, we combined our experience with that of the wider palaeobiological community to establish what tools are needed. The latter was collated by conducting an online survey distributed via social media and email.
+3.  We first report the findings of the survey which shaped the development of the package. Subsequently, we describe and demonstrate the functionality available in `palaeoverse` and provide usage examples. Finally, we discuss the resources we have made available for the community, and the future plans for the `palaeoverse` project.
+4.  `palaeoverse` is the first community-driven R package in palaeobiology, developed with the intention of bringing palaeobiologists together to establish agreed standards for high-quality quantitative research. The package provides a user-friendly platform for preparing data for analysis with well-documented code to enhance transparency. The functionality available in `palaeoverse` improves code reproducibility and accessibility, which is beneficial for both the review process and future research.
 
 # Keywords
 
-Analytical Palaeobiology, Computational Palaeobiology, R programming, Reusable, Readable, Reproducible
+Analytical Palaeobiology, Computational Palaeobiology, R programming, Readable, Reusable, Reproducible
 
 \newpage
 
 # Introduction
 
-Since the development of large palaeontological datasets from the 1970s, palaeontologists have increasingly adopted computational approaches to resolve questions about the history of life on Earth. Today, the majority of sub-disciplines within palaeontology regularly require the use of large datasets of various formats to perform experiments *in silico*. This has initiated a 'Golden Age' of palaeontology [@sepkoski2009], where extensive datasets have enabled the resolution of long-standing questions about macroevolution and macroecology [@quental2013; @mannion2014; @zaffos2017; @close2020]. The advancement and increasing availability of datasets has meant that coding is now an integral part of palaeobiology, and is widely used to clean [@fossilbrush], analyse [@divdyn], and visualise data [@strap], as well as build models [@silvestro2014; @starrfelt2016] and implement simulations [@fraser2017; @furness2021]. Whilst software has been developed in languages such as C++ [@garwood2019] or Python [@silvestro2014] to support palaeobiological research, the programming language R is currently the most popular language in palaeobiology. This is due to the wide range of tools--in the form of R packages--available to help users analyse their data. Whilst these tools are often borrowed or repurposed from ecology [@inext; @vegan], there are a variety of packages that have been developed to specifically handle palaeontological data analysis [@divdyn; @claddis].
+Since the development of large palaeontological datasets from the 1970s, palaeontologists have increasingly adopted computational approaches to quantitatively address questions about the history of life on Earth [@sepkoski1978]. Today, the majority of sub-disciplines within palaeontology regularly use large datasets to perform experiments *in silico*. This has initiated a 'Golden Age' of palaeontology [@sepkoski2009], where extensive datasets of various formats are used to test macroevolutionary and macroecological hypotheses [@quental2013; @mannion2014; @zaffos2017; @close2020]. The growth and increasing availability of such datasets has meant that coding is now an integral part of palaeobiology, and is widely used to clean [@zizka2019; @fossilbrush], analyse [@guillerme2018; @divdyn], and visualise data [@strap], as well as build models [@silvestro2014; @starrfelt2016] and implement simulations [@fraser2017; @barido2019; @furness2021; @jones2021]. Whilst software has been developed in languages such as C++ [@garwood2019] and Python [@silvestro2014], the programming language R is currently the most popular in palaeobiology. This is due to the wide range of tools--in the form of R packages--available to help users analyse their data. Many of these tools are often borrowed or repurposed from ecology [@inext; @vegan], while others have been developed to specifically handle fossil data [@divdyn; @claddis].
 
-Despite this, there is a lack of packages developed explicitly for preparing data for analyses, forcing users to construct custom scripts. This has three potentially undesirable consequences: (1) unreadable code; (2) non-reusable code; and (3) unreproducible analyses. Palaeobiologists are often not trained programmers, nor should they be expected to be. However, this results in distinct differences in code style and practices amongst the community. While some researchers go to great efforts to improve code legibility and documentation, this is a time consuming task, and understandably not always done. However, in the absence of well-documented and familiar code, custom scripts can be inaccessible (i.e. unreadable) [@filazzola2022]. While increasingly requested by journals, code is not always provided as supplementary material, or made available in online repositories (e.g. GitHub). Consequently, code cannot be reused or adapted by the community, resulting in researchers having to often 'reinvent the wheel' (i.e. non-reusable code). Even when code is present, it may have been written in a way that is specific to the dataset being analysed, and might therefore require extensive reworking before it can be applied to other data. In combination, the lack of readable and reusable code leads to research results being unreproducible during the review process, or by future studies aiming to extend the work. Such issues are further exacerbated by an absence of community standards in how data should be prepared for analyses; differing approaches utilised by different researchers result in a lack of consistency between studies, making comparison between results challenging. As these factors greatly hinder the efficiency of computational palaeontological approaches and research, there is an established need for both protocols and tools for preparing palaeontological data for further analysis.
+Despite this, few packages explicitly focus on preparing data for analyses, forcing users to construct custom scripts. This can result in distinct differences in code style and practices amongst the community, including code legibility and documentation. Consequently, custom scripts can be inaccessible to other users [@filazzola2022]. Although increasingly requested by journals, code is not always provided as supplementary material, or made available in online repositories (e.g. GitHub, Zenodo, Dryad). A lack of accessible code can lead to research results being unreproducible, preventing future studies from extending the work. Even when code is available, it might be poorly documented or written in a way that is specific to the dataset being analysed. Such code might require extensive reworking before it can be applied to other data. Consequently, researchers often have to ‘reinvent the wheel’, putting time and effort into writing code that already exists, but is unavailable, inaccessible, and/or difficult to repurpose [@filazzola2022]. Such issues are exacerbated by the absence of community standards in how data should be prepared for analyses; differing approaches utilised by different researchers result in a lack of consistency between studies, making comparison between results challenging. There is therefore a well-established need for both protocols and tools for preparing palaeontological data for further analysis.
 
-Here, we introduce the R package `palaeoverse`, a community-driven toolkit for streamlining palaeobiological analyses and improving code readability and reproducibility. Our approach differs from other palaeontological R packages in that it aims to be part of a larger effort to bring the palaeobiology community together. `palaeoverse` aims to establish consensus on both the steps taken in data preparation for various forms of palaeobiological analysis, and how these steps are implemented. The package contains functions developed in line with community needs to cleanse and prepare occurrence datasets for further analysis. These needs were established by a survey conducted by members of a new working group. The functionality of `palaeoverse` can be applied to any occurrence dataset, and as such are independent of any external databases. In this paper, we report results from our survey, describe and detail the functionality of `palaeoverse`, and illustrate its features with usage examples.
+Here, we introduce the R package `palaeoverse`, a community-driven toolkit for streamlining palaeobiological analyses and improving code accessibility and reproducibility. Our approach differs from other palaeontological R packages in that it aims to bring the palaeobiological community together to establish consensus on the steps taken in data preparation for analysis, and how these steps should be implemented. The package contains functions developed in line with current researcher demands to cleanse, prepare and explore occurrence datasets for further analysis. These needs were established via a survey conducted by members of a new working group. The functionality of `palaeoverse` is purposefully flexible, and can be applied to a wide variety of occurrence datasets. In this paper, we report results from our survey, describe and detail the functionality of `palaeoverse`, and illustrate its features with usage examples.
 
 # Community survey
 
-We conducted a public survey to collect the opinions of the palaeobiological community, and determine which tools were most needed. The survey was advertised via social media (i.e. Twitter) and a mailing list, and included questions related to researchers' previous experience, pre-existing code (to identify potential contributions), and what functionality they considered useful for developing for a new package. Survey results indicate the type of data participants typically work with, the tasks commonly carried out when working with this data, and which functionality they would like to have access to in `palaeoverse` (@fig-survey). In general, participants tend to work with a wide range of data (@fig-survey), and the checking and transformation of data is the mostly commonly employed task. Various functionality was requested by survey participants, with data plotting, time binning, and data access commonly requested (@fig-survey). Finally, over 40% of participants indicated they were willing to contribute code to `palaeoverse`, reflecting the potential for a community-driven project. Specific details regarding the survey and responses can be found in the Supplementary Material.
+We conducted a public survey to collect the opinions of the palaeobiological community, and determine which tools were most needed. The survey was distributed via social media (i.e. Twitter) and email, and included questions related to researchers' previous experience, pre-existing code (to identify potential contributions), and what functionality they would considered useful in a new palaeobiological toolkit. The type of data participants (*n* = 35) typically work with, the tasks commonly carried out when working with this data, and the tools they would like to have access to are summarised in @fig-survey. Our participants work with a wide range of data (@fig-survey), and described the checking and transformation of data as the most commonly employed task. A wide variety of functions were requested by survey participants, with data plotting, time binning, and data access commonly suggested (@fig-survey). Over 40% of participants also indicated that they were willing to contribute code to `palaeoverse`, highlighting the potential for a community-driven project. Specific details regarding the survey and responses can be found in Supplementary Material 1.
 
 ```{r, echo = FALSE}
 #| label: fig-survey
 #| out.width: "60%"
-#| fig.cap: Summary of responses to the `palaeoverse` survey. (A) Previous experience on the types of palaeontological data that survey participants typically work with. (B) Tasks that respondents routinely carry out in their analyses, and the functions they would find useful in the `palaeoverse` package.
+#| fig.cap: Summary of responses to the `palaeoverse` survey. (A) The types of palaeontological data that survey participants typically work with. (B) Tasks that respondents routinely carry out in their analyses, and the functions they would find useful in the `palaeoverse` package.
 knitr::include_graphics("figures/survey.png")
 ```
 
 # Package description
 
-`palaeoverse` is a R package that provides a range of auxiliary functions to support data preparation and palaeobiological analysis. A summary of the functions available in `palaeoverse` are provided in Table 1, and further discussion on functionality is provided within the features section. To demonstrate the functionality and versatility of the package, we also provide usage examples below.
+`palaeoverse` is a R package that provides auxiliary functions to support data preparation for palaeobiological analysis. A summary of the functions currently available in `palaeoverse` is provided in Table 1, with further description provided in the Features section. To demonstrate the functionality and versatility of the package, we also provide usage examples.
 
 ## Installation
 
-The `palaeoverse` package can be installed from the CRAN using the default `install.packages()` function in R [@base]:
+The `palaeoverse` package can be installed from CRAN using the `install.packages` function in R [@base]:
 
 ```{r}
 #| eval: false
 install.packages("palaeoverse")
 ```
 
-If the user prefers, the development version of `palaeoverse` can also be installed using the R package `remotes` [@remotes]:
+If the user prefers, the development version of `palaeoverse` can be installed from GitHub via the `remotes` R package [@remotes]:
 
 ```{r}
 #| eval: false
 remotes::install_github("palaeoverse-community/palaeoverse")
 ```
 
-Subsequently, `palaeoverse` can be loaded via the default `library()` function in R:
+Following either of these steps, `palaeoverse` can be loaded via the `library` function in R:
 
 ```{r}
 #| eval: true
@@ -97,7 +97,7 @@ library("palaeoverse")
 
 ## Data
 
-The `palaeoverse` package was not developed to provide solutions for any one data source (i.e. the Paleobiology Database or Neotoma). However, functionality is developed around the assumption that most user's data would be stored in an occurrence dataframe. As such, this is the expected input data format for most functions in `palaeoverse`, and we avoid unnecessary transformation of data wherever possible. In most instances, the returned object from a function call is also a dataframe, which we believe to be the easiest data structure for most users to understand and work with. This may be undesirable for some advanced users of R. However, we assume these users have the knowledge and capability to transform the data to their desired structure.
+Functionality in `palaeoverse` was not developed to provide solutions for any one data source (e.g. the Paleobiology Database (<https://paleobiodb.org/#/>), the Geobiodiversity Database (<http://www.geobiodiversity.com>), Neptune (<https://nsb.mfn-berlin.de/>), etc.). Instead, functions are designed around the assumption that most user's data would be stored in an occurrence dataframe. As such, this is the expected input data format for most functions in `palaeoverse`, and we avoid unnecessary transformation of data by the user wherever possible. Functions are therefore flexible and can be applied to various data sources with ease. In most instances, the returned object from a function is also a dataframe, which we consider the easiest data structure for most users to understand and work with. This may be undesirable for some advanced users of R, but transforming data structure should be straightforward for these users.
 
 ## Functions
 
@@ -105,27 +105,29 @@ A summary of the functions available in `palaeoverse` is provided in @tbl-summar
 
 | **Function**      | **Description**                                                                |
 |-------------------|:-------------------------------------------------------------------------------|
-| axis_geo()        | Add an axis of the geological timescale to a plot                              |
-| bin_lat()         | Bin fossil occurrences into latitudinal bins                                   |
-| bin_spatial()     | Bin fossil occurrences into spatial bins                                       |
-| bin_time()        | Bin occurrences into time bins using different approaches                      |
-| data()            | Two example fossil occurrence datasets: 'tetrapods' or 'reefs'                 |
-| lat_bins()        | Generate latitudinal bins                                                      |
-| look_up()         | Link user-specified interval names to the International Geological Timescale   |
-| palaeorotate()    | Reconstruct the palaeogeographic distribution of fossil occurrences            |
-| phylo_check()     | Check taxon names against tips in a phylogeny and/or remove tips from the tree |
-| tax_check()       | Check taxon names in a dataset and flag potential issues                       |
-| tax_range_geo()   | Calculate the geographic range of taxa using different approaches              |
-| tax_range_time()  | Calculate and plot the temporal range of taxa                                  |
-| tax_time_expand() | Convert taxon temporal ranges to interval-level pseudo-occurrences             |
-| tax_unique()      | Calculate the number of unique taxa in a dataset of occurrences                |
-| time_bins()       | Generate stratigraphic time bins or near-equal length time bins                |
+| axis_geo          | Add a geological time scale axis to a plot                                      |
+| bin_lat           | Bin fossil occurrences into latitudinal bins                                   |
+| bin_spatial       | Bin fossil occurrences into spatial bins                                       |
+| bin_time          | Bin occurrences into time bins (choice of approaches)                          |
+| data              | Datasets: 'tetrapods', 'reefs', 'interval_key', 'GTS2012', and 'GTS2020'       |
+| group_apply       | Apply a function over user-defined groups                                      |
+| lat_bins          | Generate latitudinal bins                                                      |
+| look_up           | Link user-specified interval names to the International Geological Time Scale  |
+| palaeorotate      | Reconstruct the palaeogeographic coordinates of fossil occurrences             |
+| phylo_check       | Check taxon names against tips in a phylogeny and/or remove tips from the tree |
+| tax_check         | Check for spelling mistakes in taxon names and flag potential issues           |
+| tax_range_geo     | Calculate the geographic range of taxa (choice of approaches)                  |
+| tax_range_time    | Calculate and plot the temporal range of taxa                                  |
+| tax_expand_lat    | Convert taxon latitudinal ranges to bin-level pseudo-occurrences               |
+| tax_expand_time   | Convert taxon temporal ranges to interval-level pseudo-occurrences             |
+| tax_unique        | Calculate the number of unique taxa in a dataset of occurrences                |
+| time_bins         | Generate stratigraphic time bins or near-equal length time bins                |
 
-: A summary table of the functions available in the `palaeoverse` R package. {#tbl-summary}
+: A summary table of the functions available in the `palaeoverse` R package {#tbl-summary}
 
 ### Example datasets
 
-Two occurrence datasets (`tetrapods` and `reefs`) are included in `palaeoverse` to provide reproducible examples within the function documentation. The `tetrapods` dataset is a compilation of Carboniferous--Early Triassic tetrapods (*n* = 5,270) from the Paleobiology Database (<https://paleobiodb.org/#/>). The dataset includes variables relevant to common palaeobiological analyses, covering the taxonomic identification of fossils and their geological, geographical and environmental context. The `reefs` dataset is a compilation of fossil occurrences from Phanerozoic reefs (*n* = 4,363) from the PaleoReefs Database [@PARED]. This dataset includes information on the biological, geological, and geographical context of each reef. With the exception of the removal of superfluous columns and the renaming of some columns to improve clarity, both datasets are unaltered from source. Additional information on both datasets can be accessed via `?tetrapods` or `?reefs` once the package is loaded.
+Two occurrence datasets (`tetrapods` and `reefs`) are provided in `palaeoverse` to enable reproducible examples within function documentation. The `tetrapods` dataset is a compilation of Carboniferous--Early Triassic tetrapod occurrences (*n* = 5,270) from the Paleobiology Database. The dataset includes variables relevant to common palaeobiological analyses, covering the taxonomic identification of fossils and their geological, geographical and environmental context. The `reefs` dataset is a compilation of Phanerozoic reef occurrences (*n* = 4,363) from the PaleoReefs Database [@PARED]. This dataset includes information on the biological, geological, and geographical context of each reef. With the exception of the removal of superfluous columns and the renaming of some columns to improve clarity, both datasets are unaltered from source. Additional information on both datasets can be accessed via `?tetrapods` or `?reefs`, once the package is loaded.
 
 ```{r}
 #| eval: false
@@ -136,7 +138,7 @@ data("reefs")
 
 ### Time bins
 
-We have developed `time_bins()` to enable access to two popular Geological Timescales (GTS): GTS2012 and GTS2020 [@gts2012; @gts2020]. The function allows users to generate temporal bins at different ranks (i.e. stage, epoch, period, era, or eon) for a specified interval input:
+We have developed `time_bins` to enable access to two popular Geological Time Scales (GTS): GTS2012 and GTS2020 [@gts2012; @gts2020]. Both GTS2012 and GTS2020 are included in the package as reference datasets. The `time_bins` function allows users to generate temporal bins at different temporal ranks (i.e. stage, epoch, period, era, or eon) using these datasets for a specified interval input:
 
 ```{r}
 #| label: fig-stages
@@ -144,18 +146,20 @@ We have developed `time_bins()` to enable access to two popular Geological Times
 #| results: false
 #| fig-height: 5
 #| fig-width: 8
+#| fig.dpi: 600
 #| fig-align: center
 #| fig-cap: Phanerozoic stage-level time bins. Plot depicts the uneveness in duration of stratigraphic time bins. Bar colour filling follows the established colour scheme of the International Commision on Stratigraphy ([https://stratigraphy.org/](https://stratigraphy.org/)).
 # Get stage-level time bins
 time_bins(interval = "Phanerozoic", rank = "stage", plot = TRUE) 
 ```
 
-As evident from the output plot of this function call (@fig-stages), temporal bins generated via GTS are inherently uneven in duration. Several previous studies have attempted to circumvent this issue by generating near-equal-length time bins by grouping stages towards a target bin length [@mannion2015; @close2020]. `time_bins()` enables users to generate near-equal-length time bins following this approach (@fig-equal) to a specified target size:
+As is evident from @fig-stages, GTS temporal bins are highly uneven in duration. Several previous studies have attempted to circumvent this issue by generating near-equal-length time bins by grouping stages towards a target bin length [@mannion2015; @close2020]. `time_bins` enables users to generate near-equal-length time bins following this approach (@fig-equal) to a specified target size:
 
 ```{r}
 #| label: fig-equal
 #| fig.height: 5
 #| fig.width: 8
+#| fig.dpi: 600
 #| eval: true
 #| results: false
 #| message: false
@@ -164,11 +168,11 @@ As evident from the output plot of this function call (@fig-stages), temporal bi
 time_bins(interval = "Phanerozoic", rank = "stage", size = 15, plot = TRUE) 
 ```
 
-However, we do not advocate the use of one approach over another for generating time bins. Near-equal-length time bins can be more even in length--which is perhaps a statistical goal--but this does not ensure that the amount of rock available for sampling in these bins is even. Whilst not a statistician's dream, GTS bins are defined on observed data and events from the geological record and avoids grouping 'apples and pears'. Additional functionality in `time_bins()` allows the user to assign occurrences to the generated bins if age estimates are known. However, the bespoke `bin_time()` function (discussed below) is likely to be the preferred option for most fossil occurrence data.
+The appropriate set of time bins to use will depend upon the nature of subsequent analyses. Near-equal-length bins might be more desirable for calculating evolutionary rates through time, while GTS bins are defined on observed phenomena in the geological record, reflecting prior knowledge of cohesive biological units separated by some form of transition. Additional functionality in `time_bins` allows the user to assign occurrences to the generated bins if absolute ages are known (e.g. from radiometric dating). However, the bespoke `bin_time` function (discussed below) is likely to be the preferred option for most fossil occurrence data which often have an age range.
 
 ### Occurrence binning
 
-Fossil occurrences are frequently 'binned' into distinct time intervals to enable observation of changes (e.g. biodiversity or disparity) through geological time. The function `bin_time()` allows users to assign occurrences into time bins generated by the function `time_bins()` or those defined by the user:
+Fossil occurrences are frequently 'binned' into distinct time intervals to enable quantification of changes (e.g. biodiversity or disparity) through geological time. The function `bin_time` allows users to assign occurrences into time bins generated by the function `time_bins`, or those defined by the user:
 
 ```{r}
 #| eval: false
@@ -180,23 +184,9 @@ bins <- time_bins()
 bin_time(occdf = tetrapods, bins = bins, method = "mid")
 ```
 
-Whilst binning occurrences with tightly defined temporal limits proves straightforward, those with poorly constrained maximum and minimum ages can span several intervals, and therefore cannot be easily assigned to a single bin. Palaeontologists have identified numerous solutions to address this problem [@lloyd2012; @silvestro2016; @davies2017; @dean2020; @franeck2020], but there is currently no consensus on the best methodological approach and subsequent implementation. The `bin_time()` function provides five potential approaches defined by the 'method' argument: 'mid' (assigned based on the midpoint of the temporal range of the occurrence), 'majority' (assigned to the bin which covers the majority of the temporal range of the occurrence),'all' (assigned to all bins within the temporal range of the occurrence), 'random', (assigned randomly to bins within the temporal range of the occurrence, repeated up to assigned 'reps'), and 'point' (assigned randomly from a uniform distribution over the temporal range of the occurrence, repeated up to assigned 'reps'). We hope that formally including these options within the `bin_time()` function will encourage palaeontologists to routinely explore and compare the outcomes of various binning approaches with ease.
+Whilst binning occurrences with tightly defined temporal limits is straightforward, those with poorly constrained maximum and minimum ages can span several intervals, and therefore cannot be easily assigned to a single bin. Palaeontologists have identified numerous solutions to try and address this problem [@lloyd2012; @silvestro2016; @davies2017; @dean2020; @franeck2020], but there is currently no consensus on the best methodological approach and subsequent implementation. The `bin_time` function provides five approaches defined by the 'method' argument: 'mid' (assigned based on the midpoint of the temporal range of the occurrence), 'majority' (assigned to the bin which covers the majority of the temporal range of the occurrence), 'all' (assigned to all bins within the temporal range of the occurrence), 'random', (assigned randomly to bins (with equal probability) within the temporal range of the occurrence, repeated up to assigned 'reps'), and 'point' (assigned randomly from a uniform distribution over the temporal range of the occurrence, repeated up to assigned 'reps'). We hope that formally including these options within the `bin_time` function will encourage palaeontologists to routinely explore and compare the outcomes of various binning approaches with ease.
 
-Palaeobiologists are also often concerned with understanding the latitudinal distribution of biodiversity in deep time [@nicholson2016; @kroger2018; @allen2020; @jones2021]. To ease implementation of such analyses, we have also developed two functions `lat_bins()` and `bin_lat()`, which can be used to generate latitudinal bins of a given size, and assign occurrence data to those respective bins.
-
-```{r}
-#| fig.height: 5
-#| fig.width: 8
-#| eval: true
-#| results: false
-#| message: false
-# Generate latitudinal bins
-bins <- lat_bins(size = 15)
-# Assign occurrences to bins
-bin_lat(occdf = tetrapods, bins = bins, lat = "lat")
-```
-
-In recent years, palaeobiology has developed a heightened interest in the spatial structure of the fossil record, with studies focused on understanding the spatial distribution of biodiversity, and the processes that drive them [@close2017; @antell2020; @flannery2022]. In order to support such analyses, `bin_spatial()` has been developed for `palaeoverse.` The function allows the user to assign occurrence data into equal-area grid cells using discrete hexagonal grids via the `h3jsr` package [@h3jsr]. Additional functionality allows simultaneous assignation of occurrence data to cells of a finer-scale (i.e. a 'sub-grid') within the primary grid. This might be desirable for users to evaluate the differences in the amount of area occupied by occurrences within their primary grid cells. This functionality also allows the user to easily rarefy across sub-grid cells within primary cells to further standardise spatial sampling.
+In recent years, palaeobiology has developed a heightened interest in the spatial structure of the fossil record, with studies focused on understanding the spatial distribution of biodiversity, and the processes that drive them [@vilhena2013; @close2020b; @antell2020; @flannery2022; @chiarenza2022; @jones2022]. In order to support such analyses, `bin_spatial` has been developed for `palaeoverse.` The function allows the user to assign occurrence data into equal-area grid cells using discrete hexagonal grids via the `h3jsr` package [@h3jsr]. Additional functionality allows simultaneous assignation of occurrence data to cells of a finer-scale (i.e. a 'sub-grid') within the primary grid. This might be desirable for users to evaluate differences in the amount of area occupied by occurrences within their primary grid cells. This functionality also allows the user to rarefy across sub-grid cells within primary cells to further standardise spatial sampling.
 
 ```{r}
 #| eval: false
@@ -207,11 +197,26 @@ bin_spatial(occdf = reefs, spacing = 250)
 bin_spatial(occdf = reefs, spacing = 250, sub_grid = 50)
 ```
 
+Understanding the latitudinal distribution of biodiversity in deep time has also gained research interest in recent years [@powell2009; @mannion2012; @mannion2014; @allen2020; @song2020; @jones2021]. To ease implementation of such analyses, we have developed two functions `lat_bins` and `bin_lat` which can be used to generate latitudinal bins of a given size, and assign occurrence data to those respective bins.
+
+```{r}
+#| fig.height: 5
+#| fig.width: 8
+#| eval: true
+#| results: false
+#| message: false
+# Generate latitudinal bins
+bins <- lat_bins(size = 15)
+# Assign occurrences to bins
+bin_lat(occdf = tetrapods, bins = bins)
+```
+
+
 ### Palaeogeographic reconstruction
 
-Palaeobiologists use plate rotation models to reconstruct the location of fossil occurrences at time of deposition. While some databases (e.g. the Paleobiology Database) provide pre-generated palaeocoordinates for occurrences, they do not contain all published or unpublished data. Moreover, these databases provide reconstructed coordinates from only one or two of the many plate rotation models available, and it is not always transparent which model (or version of the model) has been used. This lack of transparency is reflected in some published articles that only cite the use of the GPlates [@gplates] to reconstruct palaeocoordinates, yet lack specifics on which plate rotation model was used with the GPlates web service or desktop software.
+Using the present-day coordinates of fossil occurrences, plate rotation models can be used to reconstruct their location at time of deposition. Existing fossil databases provide reconstructed coordinates for occurrences from only one or two of the many plate rotation models available (if any), and it is not always transparent which model (or version of the model) has been used. This lack of transparency is reflected in some published articles that only cite the use of the GPlates [@boyden2011; @gplates] to reconstruct palaeocoordinates, yet lack specifics on which plate rotation model was used with the GPlates web service or desktop software. Furthermore, the uncertainty in palaeogeographic reconstructions is underappreciated; reconstructed coordinates are often treated as being well-established, rather than model-based estimates. Finally, both published and unpublished data (e.g. museum specimens) exists outside of these databases which researchers might require palaeocoordinates for. 
 
-We have developed the function `palaeorotate` to address these shortcomings. The function allows palaeocoordinates to be reconstructed within R using two different approaches ('point' and 'grid'). The first makes use of the GPlates web service, and allows point data to be rotated to specific ages using a range of available models. The second approach uses reconstruction files of pre-generated palaeocoordinates to spatiotemporally link occurrences' modern coordinates and age estimate with its respective palaeocoordinates. These rotation files were generated using a 1º x 1º spatial grid, and allows palaeocoordinates to be generated efficiently for large datasets. Additional functionality when using the reconstruction files allows the user to calculate the palaeolatitudinal range between reconstructed coordinates, as well as the maximum great circle distance.
+We have developed the function `palaeorotate` to address these shortcomings. The function allows palaeocoordinates to be reconstructed within R using two different approaches ('point' and 'grid'). The first makes use of the GPlates Web Service, and allows point data to be rotated to specific ages using the available models (see <https://gwsdoc.gplates.org>). The second approach uses reconstruction files of pre-generated palaeocoordinates to spatiotemporally link occurrences' modern coordinates and age estimates with their respective palaeocoordinates. These rotation files were generated using a 1º x 1º spatial grid, and allows palaeocoordinates to be generated efficiently for large datasets. Additional functionality when using the reconstruction files allows the user to calculate the palaeolatitudinal range between reconstructed coordinates, as well as the great circle distance between the two most distant points (i.e. palaeogeographic uncertainty).
 
 ```{r}
 #| eval: false
@@ -225,7 +230,7 @@ palaeorotate(occdf = tetrapods, method = "grid", uncertainty = TRUE)
 
 ### Taxon-related features
 
-When working with large occurrence datasets, it is easy for errors to creep into the data. One frequently encountered issue is spelling variations of the same taxon name. This can have undesirable consequences when conducting analyses such as calculating taxonomic richness or abundance. We provide the `tax_check` function in `palaeoverse` to enable the user to compute string distances between provided taxonomic names via the heuristic metric Jaro distance [@jaro1989]. This metric provides a measure of dissimilarity between 0 (exact match) and 1 (completely dissimilar). During function call, the user defines a threshold for string dissimilarity to identify potential synonyms. In `tax_check`, Jaro distances are calculated via the `stringdistmatrix` function from the `stringdist` package [@stringdist].
+When working with large occurrence datasets, errors can easily creep into data. One frequently encountered issue is spelling variations of the same taxon name. This can have undesirable consequences when calculating metrics such as taxonomic richness or abundance. The `tax_check` function computes character string distances between taxonomic names via the heuristic Jaro distance metric [@jaro1989]. This metric provides a measure of dissimilarity between character strings of 0 (exact match) to 1 (completely dissimilar). During function call, the user defines a threshold for string dissimilarity to identify potential synonyms. In `tax_check`, Jaro distances are calculated via the `stringdistmatrix` function from the `stringdist` package [@stringdist]. While this function helps researchers to perform a spell check on their dataset, this function is no replacement for taxonomic vetting.
 
 ```{r}
 #| eval: false
@@ -235,7 +240,7 @@ When working with large occurrence datasets, it is easy for errors to creep into
 tax_check(occdf = tetrapods, name = "genus")
 ```
 
-The function `tax_unique` is designed to improve the accuracy of richness estimates obtained from fossil occurrence data. Palaeobiologists routinely remove occurrence data not identified to a desired taxonomic resolution. For example, if analysis is conducted at species-level, occurrences identified to genus level (or above) are discarded from the dataset. However, these occurrences can represent unique species, and their removal can impact richness estimation. The `tax_unique` function reduces the amount of occurrences being discarded by retaining fossils which are identified to a coarser taxonomic resolution than the desired level, but must represent a clade not already in the filtered dataset. For instance, with three fossil occurrences identified as *Tyrannosaurus rex*, *Spinosaurus aegyptiacus*, and Diplodocidae, the latter would be discarded under species-level analysis (i.e. a species richness of two). However, Diplodocidae clearly represents a different species. Using `tax_unique`, Diplodocidae would be treated as an additional species (i.e. a species richness of three). However, the approach is also conservative in that if multiple coarsely identified occurrences exist in the dataset, these are collapsed to the minimum number of possible species (i.e. two occurrences of Diplodocidae would be treated as only one species). This method is similar to the `cryptic` diversity measure introduced by @mannion2011.
+The function `tax_unique` is provided to improve the accuracy of richness estimates from fossil occurrence data. Palaeobiologists routinely discard occurrences not identified to their desired taxonomic resolution. For example, if analysis is conducted at species-level, occurrences identified to genus level (or above) are discarded from the dataset. However, these occurrences can represent unique species, and their removal can impact richness estimation. The `tax_unique` function reduces the amount of unique taxa being discarded by retaining fossils which are identified to a coarser taxonomic resolution than the desired level, but must represent a clade not already in the filtered dataset. For instance, with three fossil occurrences identified as *Tyrannosaurus rex*, *Spinosaurus aegyptiacus*, and Diplodocidae indet., the latter would be discarded under species-level analysis (i.e. a species richness of two). However, this occurrence clearly represents a different species to the two already present in the dataset. Using `tax_unique`, Diplodocidae is treated as an additional species (i.e. a species richness of three). However, the implementation is also conservative: if multiple coarsely identified occurrences exist in the dataset, these are collapsed to the minimum number of possible species (i.e. two occurrences of Diplodocidae indet. would be treated as only one species). This method is similar to the 'cryptic' diversity measure introduced by @mannion2011.
 
 ```{r}
 #| eval: false
@@ -245,12 +250,13 @@ The function `tax_unique` is designed to improve the accuracy of richness estima
 tax_unique(occdf = tetrapods)
 ```
 
-Two functions exist in `palaeoverse` for computing taxon ranges. The first, `tax_range_time` can be called to calculate and plot the temporal range of taxa. That is, the function will identify all unique taxa provided in the occurrence dataframe and find their first and last appearance dates. The second, `tax_range_geo` can be called to calculate the geographic range of taxa. As there is no one single metric for calculating geographic range [@darroch2020], this function allows the user to specify one of four different approaches: (1) the area of a convex hull; (2) the (palaeo-)latitudinal range; (3) the maximum great-circle distance; and (4) the number of occupied equal-area grid cells. Similar to `tax_range_time`, the function will identify all unique taxa provided, and calculate these metrics based on the available occurrences of each taxa.
+Two functions exist in `palaeoverse` for computing taxon ranges. The first, `tax_range_time`, can be called to calculate and plot the temporal range of taxa. The function identifies all unique taxa provided in the occurrence dataframe and finds their first and last appearance dates. The second, `tax_range_geo`, can be called to calculate the geographic range of taxa. This function allows the user to specify one of four different approaches [@darroch2020]: (1) the area of a convex hull; (2) the (palaeo-)latitudinal range; (3) the maximum great-circle distance; and (4) the number of occupied equal-area grid cells. Similar to `tax_range_time`, the function will identify all unique taxa provided, and calculate these metrics based on the available occurrences of each taxon.
 
 ```{r}
 #| label: fig-range
 #| fig.height: 5
 #| fig.width: 8
+#| fig.dpi: 600
 #| eval: true
 #| results: false
 #| message: false
@@ -269,19 +275,7 @@ tax_range_time(occdf = tetrapods, name = "order", plot = TRUE)
 tax_range_geo(occdf = tetrapods, name = "order", method = "lat")
 ```
 
-The `tax_time_expand` function is provided to convert taxon temporal range data to interval-level pseudo-occurrences. While these pseudo-occurrences should not be treated as equivalent to actual occurrence data, such data can be useful for performing statistical analyses where interval-level data is required.
-
-```{r}
-#| eval: false
-#| results: false
-#| message: false
-# Create example dataframe
-taxdf <- data.frame(name = c("A", "B", "C"),
-                    max_ma = c(150, 60, 30),
-                    min_ma = c(110, 20, 0))
-# Convert to interval level pseudo-occurrences
-tax_time_expand(taxdf = taxdf)
-```
+The provided `tax_expand_time` and `tax_expand_lat` functions are complementary to the taxonomic range functions. They convert temporal or latitudinal range data to bin-level pseudo-occurrences. These pseudo-occurrences serve to fill in ghost ranges, in which a taxon is presumed to be present, but no record exists. While these pseudo-occurrences should not be treated as equivalent to actual occurrence data, such data can be useful for performing statistical analyses where bin-level data is required.
 
 ### Phylogeny wrangling
 
@@ -289,50 +283,61 @@ The function `phylo_check` compares a list of taxonomic names to the list of tip
 
 ### Additional features
 
-A common feature request from our survey was the ability to add the 'Geological Timescale' to time-series plots in base R, with similar behaviour to the `deeptime` R package [@deeptime] for `ggplot2` [@ggplot]. To address this request, the `axis_geo` function has been developed for the `palaeoverse` package and has similar functionality to that of `deeptime::coord_geo` (@fig-axis).
-
-```{r}
-#| label: fig-axis
-#| fig.height: 6
-#| fig.width: 8
-#| eval: true
-#| results: false
-#| message: false
-#| fig.cap: Example Phanerozoic plot. Plot depicts the usage of the `axis_geo` function for adding the Geological Timescale to a base R plot.
-plot(x = 540:0, xlab = "Time (Ma)", ylab = "User-variable",
-     xlim = c(540, 0), xaxt = "n")
-axis_geo(side = 1, intervals = "periods")
-```
-
-A common difficulty faced by palaeontologists is that the temporal information related to fossil occurrence data is often asynchronous, and not directly comparable. Temporal data may be provided as either interval names or numeric ages, and might conform to different time scales (e.g. international stages from the International Commision on Stratigraphy, or North American land mammal ages). While interval names tend to be relatively stable over time, numerical age estimates are frequently updated with improved dating techniques, or the collection of new data. Consequently, where possible, interval names should thus be used to correlate occurrences from different stratigraphic time scales. The `look_up` function is provided to help assign a common time scale--international stages--to occurrence data. This is achieved with a user-defined table that links arbitrary interval names to corresponding stages on a common time scale. Numerical ages for the assigned stages can be provided by the user, or looked up in `GTS2012` or `GTS2020`.
+Datasets are frequently explored within groups in palaeobiology, whether it be time bins, collections or otherwise. The `group_apply` function has been included to allow users to run functions over a single, or multiple grouping variables with ease.
 
 ```{r}
 #| eval: false
 #| results: false
 #| message: false
-look_up(occdf = tetrapods, interval_key = "example")
+# Compute the number of occurrences per collection
+group_apply(occdf = tetrapods, group = "collection_no", fun = nrow)
+```
+
+A common feature request from our survey was the ability to add the 'Geological Time Scale' to time-series plots in base R, with similar behaviour to the `deeptime` R package [@deeptime] for `ggplot2` [@ggplot]. To address this request, the `axis_geo` function has been developed for the `palaeoverse` package (@fig-axis).
+
+```{r}
+#| label: fig-axis
+#| fig.height: 6
+#| fig.width: 8
+#| fig.dpi: 600
+#| eval: true
+#| results: false
+#| message: false
+#| fig.cap: Example Phanerozoic plot. Plot depicts the usage of the `axis_geo` function for adding the Geological Time Scale to a base R plot.
+plot(x = 540:0, xlab = "Time (Ma)", ylab = "User-variable",
+     xlim = c(540, 0), xaxt = "n", type = "l", lwd = 2)
+axis_geo(side = 1, intervals = "periods")
+```
+
+A common difficulty faced by palaeontologists is that the temporal information associated with fossil occurrence data is often asynchronous, and not directly comparable. Temporal data may be provided as either interval names or numeric ages, and might conform to different time scales (e.g. international geological stages, or North American land mammal ages). While interval names tend to be relatively stable over time, numerical age estimates are frequently updated with improved dating techniques, or the collection of new data. Consequently, where possible, interval names should be used to correlate occurrences from different stratigraphic time scales. The `look_up` function is provided to help assign a common time scale--typically international stages--to occurrence data. This is achieved with a user-defined table that links arbitrary interval names to corresponding stages on a common time scale. Numerical ages for the assigned stages can be provided by the user (see example dataset `interval_key`), or looked up in `GTS2012` or `GTS2020`.
+
+```{r}
+#| eval: false
+#| results: false
+#| message: false
+look_up(occdf = tetrapods)
 ```
 
 # Resources
 
-To support the aims and use of `palaeoverse`, we have made several resources available to the community. Firstly, we have built a package website ([www.palaeoverse.org](www.palaeoverse.org)) which provides information on how to contribute to `palaeoverse`, how to report issues and bugs, and a general community code of conduct. Secondly, a poster and 'cheat sheet' is provided via the website which serves as a visual guide on the functionality available in `palaeoverse.` Finally, a tutorial is provided to demonstrate usage examples with real fossil occurrence data.
+To support the aims and use of `palaeoverse`, we have made several resources available to the palaeobiological community. Firstly, we have built a package website (<http://www.palaeoverse.org>) which provides information on how to contribute to `palaeoverse`, how to report issues and bugs, and a general community code of conduct. Secondly, a poster and 'cheatsheet' is provided via the website which serves as a visual guide on functionality. Finally, a vignette is provided to demonstrate usage examples with real fossil occurrence data.
 
 # Future perspectives
 
-While the initial development of the `palaeoverse` R package was led by the authors of this manuscript, it was also informed by the opinions of 34 additional researchers (survey participants). Our hope is that `palaeoverse` will evolve into a community-driven package with contributions from the wider palaeontological community broadening available functionality. To support this aim, we have provided guidance on how the community can contribute to `palaeoverse` on the package website (<http://www.palaeoverse.org>). This approach has the wider aims of establishing community standards and consensus in computational palaeobiological research, and enhancing the potential for comparison between studies. Moreover, a community-driven package will assist in making code more familiar and readable to fellow researchers, prevent researchers from reinventing the wheel for common procedures, and improve overall reproducibility of research through the use of computational tools which have been vetted and accepted by the broader community.
+While the initial development of the `palaeoverse` R package was led by the authors of this manuscript, it was also informed by the opinions of 35 additional researchers (survey participants). Our hope is that `palaeoverse` will evolve into a community-driven package, with contributions from the wider palaeontological community broadening available functionality. To support this aim, we have provided guidance on how the community can contribute to `palaeoverse` on the package website (<http://www.palaeoverse.org>). Our working group also has the wider aim of establishing community standards and consensus in computational palaeobiological research, and enhancing the potential for comparison between studies through providing a space for discussion of these issues. We hope to assist in making code more familiar and readable to fellow researchers, prevent researchers from 'reinventing the wheel' for common procedures, and improve the overall reproducibility of research through the use of computational tools which have been vetted and accepted by the broader community.
 
-The development of the `palaeoverse` R package marks an initial effort to both streamline palaeontological analysis pipelines and unite the computational palaeobiology community. However, future efforts will see the expansion of the `palaeoverse` 'universe'. For example, whilst the functions of `palaeoverse` are currently focused on handling occurrence based datasets, the scope of the package could be expanded to handle other data types (such as phylogenetic datasets) while maintaining the same base principles of readable, reusable, and reproducible research. We also aim to broaden the reach of `palaeoverse` beyond a singular R package with the development of additional packages, relevant Shiny applications to support non-R users and teaching exercises, tutorials to offer guidance for new researchers, and workshops to provide practical experience. We hope these efforts foster collaboration and the sharing of resources amongst the community. Finally, we warmly welcome the community to join these efforts and have established a community space accordingly to help facilitate the process (<https://groups.google.com/g/palaeoverse>).
+The development of the `palaeoverse` R package marks an initial effort to both streamline palaeontological analysis pipelines and unite the computational palaeobiology community. Future efforts will see the expansion of the `palaeoverse` 'universe', with the development Shiny applications to support non-R users and teaching exercises, tutorials to offer guidance for new researchers, and workshops to provide practical experience. We hope these efforts foster collaboration and the sharing of resources amongst the community. Finally, we warmly welcome the community to join these efforts and have established a community space accordingly to help facilitate the process (<https://groups.google.com/g/palaeoverse>).
 
 # Acknowledgements
 
-The authors are extremely grateful to all survey respondents who helped to shape the development of `palaeoverse.` The contributions of LAJ, SG, and AAC were supported by the European Research Council under the European Union's Horizon 2020 research and innovation program (grant agreement 947921; MAPAS project). The contributions of BJA were supported by an ETH+ grant (BECCY). The contributions of CDD were supported by a Royal Society grant (RF_ERE_210013). This is Paleobiology Database publication no XXX. **Please add and update where appropriate :-)**.
+The authors are extremely grateful to all survey respondents who helped to shape the development of `palaeoverse.` The contributions of LAJ, SG, and AAC were supported by the European Research Council under the European Union's Horizon 2020 research and innovation program (grant agreement 947921; MAPAS project). AAC was also supported by a Juan de la Cierva-formación 2020 fellowship funded by FJC2020-044836-I / MCIN /AEI / 10.13039 /501100011033 by the European Union “NextGenerationEU”/ PRTR. The contributions of BJA were supported by an ETH+ grant (BECCY). The contributions of CDD were supported by a Royal Society grant (RF_ERE_210013). This is Paleobiology Database publication no XXX. **Please add and update where appropriate :-)**.
 
 # Authors' contributions
 
-LAJ conceived the project. All authors contributed to developing the project. LAJ, BJA, WG, KE, CD, and JF contributed the code. LAJ, BJA, WG, KE, CD, PG, SG, and LB contributed to testing and reviewing the code. All authors contributed to writing the manuscript. **Please add and update where appropriate, you have all contributed in some way :-)**.
+LAJ conceived the project. All authors contributed to developing the project. LAJ, BJA, WG, KE, CD, and JF contributed the code. All authors contributed to testing and reviewing the code. SG processed the survey results and produced the figures. All authors contributed to writing the manuscript. **Please add and update where appropriate, you have all contributed in some way :-)**.
 
 # Data accessibility
 
-The `palaeoverse` R package is hosted on CRAN (XXX), and is available on GitHub (<https://github.com/palaeoverse-community/palaeoverse>). All example datasets are bundled with the R package.
+The `palaeoverse` R package is hosted on CRAN (XXX) and is available on GitHub (<https://github.com/palaeoverse-community/palaeoverse>). All example datasets are bundled with the R package.
 
 # References
