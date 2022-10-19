@@ -231,7 +231,7 @@ When working with large occurrence datasets, errors can easily creep into data. 
 #| results: false
 #| message: false
 # Check for taxonomic errors
-tax_check(occdf = tetrapods, name = "genus")
+tax_check(taxdf = tetrapods, name = "genus")
 ```
 
 The function `tax_unique` is provided to improve the accuracy of richness estimates from fossil occurrence data. Palaeobiologists routinely discard occurrences not identified to their desired taxonomic resolution. For example, if analysis is conducted at species-level, occurrences identified to genus level (or above) are discarded from the dataset. However, these occurrences can represent unique species, and their removal can impact richness estimation. The `tax_unique` function reduces the amount of unique taxa being discarded by retaining fossils which are identified to a coarser taxonomic resolution than the desired level, but must represent a clade not already in the filtered dataset. For instance, with three fossil occurrences identified as *Tyrannosaurus rex*, *Spinosaurus aegyptiacus*, and Diplodocidae indet., the latter would be discarded under species-level analysis (i.e. a species richness of two). However, this occurrence clearly represents a different species to the two already present in the dataset. Using `tax_unique`, Diplodocidae is treated as an additional species (i.e. a species richness of three). However, the implementation is also conservative: if multiple coarsely identified occurrences exist in the dataset, these are collapsed to the minimum number of possible species (i.e. two occurrences of Diplodocidae indet. would be treated as only one species). This method is similar to the 'cryptic' diversity measure introduced by @mannion2011.
