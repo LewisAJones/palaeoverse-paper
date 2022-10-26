@@ -3,7 +3,7 @@ title: "Supplementary Information"
 subtitle: "palaeoverse: a community-driven *R* package to support palaeobiological analysis"
 author:
   - "---"
-  - Lewis A. Jones^1^, William Gearty^2^, Bethany J. Allen^3,4^, Kilian Eichenseer^5^, Christopher D. Dean^6^, Sofía Galván^1^, Miranta Kouvari^6,7^, Emma M. Dunne^8^, Pedro L. Godoy^9,10^, Cecily Nicholl^6^, Lucas Buffan^11^, Erin M. Dillon^12,13^, Joseph T. Flannery-Sutherland^14^, and Alfio Alessandro Chiarenza^1^
+  - Lewis A. Jones^1^, William Gearty^2^, Bethany J. Allen^3,4^, Kilian Eichenseer^5^, Christopher D. Dean^6^, Sofía Galván^1^, Miranta Kouvari^6,7^, Pedro L. Godoy^8,9^, Cecily Nicholl^6^, Lucas Buffan^10^, Erin M. Dillon^11,12^, Joseph T. Flannery-Sutherland^13^, and Alfio Alessandro Chiarenza^1^
   - "---"
   - "*^1^Centro de Investigación Mariña, Grupo de Ecoloxía Animal, Universidade de Vigo, 36310 Vigo, Spain.*"
   - "*^2^Division of Paleontology, American Museum of Natural History, New York, NY, 10024 USA.*"
@@ -12,13 +12,12 @@ author:
   - "*^5^Department of Earth Sciences, Durham University, South Road, DH1 3LE, Durham, United Kingdom.*"
   - "*^6^Department of Earth Sciences, University College London, Gower Street, WC1E 6BT, London, United Kingdom.*"
   - "*^7^Life Sciences Department, Natural History Museum, Cromwell Road, SW7 5BD, London, United Kingdom.*"
-  - "*^8^Friedrich-Alexander-Universität Erlangen-Nürnberg (FAU), GeoZentrum Nordbayern, 91054 Erlangen, Germany.*"
-  - "*^9^Laboratório de Paleontologia, Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto, Universidade de São Paulo, Ribeirão Preto, SP, 14040-901 Brazil.*"
-  - "*^10^Department of Anatomical Sciences, Stony Brook University, Stony Brook, NY, 11794 USA.*"
-  - "*^11^Département de Biologie, École Normale Supérieure de Lyon, Université Claude Bernard Lyon 1, 69342 Lyon Cedex 07, France.*"
-  - "*^12^Smithsonian Tropical Research Institute, Balboa, Republic of Panama.*"
-  - "*^13^Department of Ecology, Evolution, and Marine Biology, University of California, Santa Barbara, CA 93106, USA.*"
-  - "*^14^School of Earth Sciences, University of Bristol, BS8 1RL, Bristol, UK*"
+  - "*^8^Laboratório de Paleontologia, Faculdade de Filosofia, Ciências e Letras de Ribeirão Preto, Universidade de São Paulo, Ribeirão Preto, SP, 14040-901 Brazil.*"
+  - "*^9^Department of Anatomical Sciences, Stony Brook University, Stony Brook, NY, 11794 USA.*"
+  - "*^10^Département de Biologie, École Normale Supérieure de Lyon, Université Claude Bernard Lyon 1, 69342 Lyon Cedex 07, France.*"
+  - "*^11^Smithsonian Tropical Research Institute, Balboa, Republic of Panama.*"
+  - "*^12^Department of Ecology, Evolution, and Marine Biology, University of California, Santa Barbara, CA 93106, USA.*"
+  - "*^13^School of Earth Sciences, University of Bristol, BS8 1RL, Bristol, UK*"
   - "---"
   - "**Corresponding author:** LewisAlan.Jones@uvigo.es"
 format:
@@ -35,7 +34,7 @@ format:
       - right=25.4mm
       - heightrounded
 bibliography: references.bib
-csl: MEE.csl
+csl: methods-in-ecology-and-evolution.csl
 ---
 
 # Survey
