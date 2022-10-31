@@ -4,7 +4,7 @@ author:
   - "---"
   - Lewis A. Jones^1^, William Gearty^2^, Bethany J. Allen^3,4^, Kilian Eichenseer^5^, Christopher D. Dean^6^, Sofía Galván^1^, Miranta Kouvari^6,7^, Pedro L. Godoy^8,9^, Cecily Nicholl^6^, Lucas Buffan^10^, Erin M. Dillon^11,12^, Joseph T. Flannery-Sutherland^13^, and Alfio Alessandro Chiarenza^1^
   - "---"
-  - "*^1^Centro de Investigación Mariña, Grupo de Ecoloxía Animal, Universidade de Vigo, 36310 Vigo, Spain.*"
+  - "*^1^Grupo de Ecoloxía Animal, Departamento de Ecoloxía e Bioloxía Animal, Universidade de Vigo, 36310 Vigo, Spain.*"
   - "*^2^Division of Paleontology, American Museum of Natural History, New York, NY, 10024 USA.*"
   - "*^3^Department of Biosystems Science and Engineering, ETH Zürich, 4058 Basel, Switzerland.*"
   - "*^4^Computational Evolution Group, Swiss Institute of Bioinformatics, 1015 Lausanne, Switzerland.*"
@@ -37,7 +37,6 @@ format:
 bibliography: references.bib
 csl: methods-in-ecology-and-evolution.csl
 ---
-**This manuscript is a pre-print and has not been peer-reviewed. The manuscript is in the process of being submitted to *Methods in Ecology and Evolution* and the package to The Comprehensive R Archive Network (CRAN). Please note that subsequent versions of this manuscript will differ slightly in content. If accepted, the final version of this manuscript will be available via the ‘Peer-reviewed Publication DOI’ link on this page. Please feel free to contact the corresponding author with any queries, we welcome any feedback!**
 
 1.  The open-source programming language 'R' has become a standard tool in the palaeobiologist's toolkit. Its popularity within the palaeobiology community continues to grow, with published articles increasingly citing the usage of R and R packages. However, there are currently a lack of agreed standards for data preparation and available frameworks to support implementation of such standards. Consequently, data preparation workflows are often unclear and not reproducible, even when code is provided. Moreover, due to a lack of code accessibility and documentation, palaeobiologists are often forced to 'reinvent the wheel' to find solutions to issues already solved by other members of the community.
 2.  Here, we introduce `palaeoverse`, a community-driven R package to aid data preparation and exploration for quantitative palaeobiological research. The package is freely available and has three core principles: (1) streamline data preparation and analyses; (2) enhance code readability; and (3) improve reproducibility of results. To develop these aims, we assessed the analytical needs of the broader palaeobiological community using an online survey, in addition to incorporating our own experiences.
@@ -75,7 +74,7 @@ After conducting the community survey, we combined participant input with our ow
 
 ## Installation
 
-**Upon CRAN approval:** The `palaeoverse` package can be installed from CRAN using the `install.packages` function in R [@base]:
+The `palaeoverse` package can be installed from CRAN using the `install.packages` function in R [@base]:
 
 ```{r}
 #| eval: false
@@ -343,6 +342,6 @@ LAJ conceived the project. All authors contributed to developing the project. LA
 
 # Data accessibility
 
-The `palaeoverse` R package is hosted on CRAN (TBC) and is available on GitHub (<https://github.com/palaeoverse-community/palaeoverse>). All example datasets are bundled with the R package. All code is released under a GPL (>= 3) license.
+The `palaeoverse` R package is hosted on CRAN (<https://cran.r-project.org/web/packages/palaeoverse/>) and is available on GitHub (<https://github.com/palaeoverse-community/palaeoverse>). All example datasets are bundled with the R package. All code is released under a GPL (>= 3) license.
 
 # References

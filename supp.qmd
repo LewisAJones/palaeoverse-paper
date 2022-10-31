@@ -1,11 +1,11 @@
 ---
 title: "Supplementary Information"
-subtitle: "palaeoverse: a community-driven *R* package to support palaeobiological analysis"
+subtitle: "palaeoverse: a community-driven R package to support palaeobiological analysis"
 author:
   - "---"
   - Lewis A. Jones^1^, William Gearty^2^, Bethany J. Allen^3,4^, Kilian Eichenseer^5^, Christopher D. Dean^6^, Sofía Galván^1^, Miranta Kouvari^6,7^, Pedro L. Godoy^8,9^, Cecily Nicholl^6^, Lucas Buffan^10^, Erin M. Dillon^11,12^, Joseph T. Flannery-Sutherland^13^, and Alfio Alessandro Chiarenza^1^
   - "---"
-  - "*^1^Centro de Investigación Mariña, Grupo de Ecoloxía Animal, Universidade de Vigo, 36310 Vigo, Spain.*"
+  - "*^1^Grupo de Ecoloxía Animal, Departamento de Ecoloxía e Bioloxía Animal, Universidade de Vigo, 36310 Vigo, Spain.*"
   - "*^2^Division of Paleontology, American Museum of Natural History, New York, NY, 10024 USA.*"
   - "*^3^Department of Biosystems Science and Engineering, ETH Zürich, 4058 Basel, Switzerland.*"
   - "*^4^Computational Evolution Group, Swiss Institute of Bioinformatics, 1015 Lausanne, Switzerland.*"
